@@ -1,7 +1,8 @@
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 @app.route("/")
-def index():
-    return "This is the fakedrive"
+def login():
+    return render_template("login.html")
