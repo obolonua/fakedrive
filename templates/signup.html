@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FakeDrive Login</title>
+    <title>FakeDrive Sign</title>
     <style>
         body {
             margin: 0;
@@ -69,7 +69,7 @@
         input[type="submit"] {
             margin-top: 20px;
             padding: 10px;
-            background-color: #007BFF;
+            background-color: #FF5733;
             color: white;
             border: none;
             border-radius: 4px;
@@ -78,7 +78,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #e64a2e;
         }
 
         .note {
@@ -88,7 +88,7 @@
         }
 
         .note a {
-            color: #FF5733;
+            color: #007BFF;
             text-decoration: none;
             font-weight: bold;
         }
@@ -112,20 +112,23 @@
         </div>
     </nav>
 
-    <!-- Login Form -->
+    <!-- Signup Form -->
     <div class="container">
-        <h2>Login to FakeDrive</h2>
-        <form action="/login" method="post">
-            <label for="username">Username:</label>
+        <h2>Create Your FakeDrive Account</h2>
+        <form action="/signup" method="post">
+            <label for="username">Choose a Username:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="password">Password:</label>
+            <label for="password">Choose a Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <input type="submit" value="Log In">
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <input type="submit" value="Sign Up">
         </form>
         <div class="note">
-            Don't have an account? <a href="/signup">Sign up here</a>.
+            Already have an account? <a href="/login">Log in here</a>.
         </div>
     </div>
 
