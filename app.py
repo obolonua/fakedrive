@@ -54,3 +54,8 @@ def authentication():
 @app.route("/My Fakedrive")
 def my_fakedrive():
     return render_template("my_fakedrive.html")
+
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
