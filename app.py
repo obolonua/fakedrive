@@ -50,3 +50,7 @@ def authentication():
         return redirect("/My Fakedrive")
     else:
         return "ERROR: wrong username or password"
+    
+@app.route("/My Fakedrive")
+def my_fakedrive():
+    return render_template("my_fakedrive.html")
