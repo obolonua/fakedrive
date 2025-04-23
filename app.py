@@ -43,13 +43,14 @@ def authentication():
     password = request.form["password"]
     
     sql = "SELECT password_hash FROM users WHERE username = ?"
-    password_hash = db.query(sql, [username])[0][0]
+    result = db.query(sql, [username])
+    if not result:
+        return "ERROR: wrong username or password"
+    password_hash = result[0][0]
 
     if check_password_hash(password_hash, password):
         session["username"] = username
         return redirect("/My Fakedrive")
-    else:
-        return "ERROR: wrong username or password"
     
 @app.route("/My Fakedrive")
 def my_fakedrive():
