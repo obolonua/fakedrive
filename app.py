@@ -12,6 +12,10 @@ app.secret_key = config.secret_key
 def main():
     return render_template("main.html")
 
+@app.route("/about")
+def home():
+    return render_template("about.html")
+
 @app.route("/signup")
 def signup():
     return  render_template("signup.html")
