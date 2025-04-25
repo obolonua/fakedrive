@@ -1,12 +1,16 @@
 import sqlite3
 from flask import Flask
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 import db
 import config
+import os
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+UPLOAD_FOLDER = "uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok = True)
+app.config[UPLOAD_FOLDER] = UPLOAD_FOLDER
 
 @app.route("/")
 def main():
