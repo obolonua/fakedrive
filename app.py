@@ -1,7 +1,8 @@
 import sqlite3
 from flask import Flask
-from flask import render_template, request, session, redirect, send_from_directory
+from flask import render_template, request, session, redirect, send_file
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 import db
 import config
 import os
@@ -10,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = config.secret_key
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok = True)
-app.config[UPLOAD_FOLDER] = UPLOAD_FOLDER
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 @app.route("/")
 def main():
@@ -70,3 +71,20 @@ def my_fakedrive():
 def logout():
     del session["username"]
     return redirect("/")
+
+@app.route("/upload", methods=["POST"])
+def upload():
+    if "username" not in session:
+        return redirect("/login")
+    
+    file = request.files["file"]
+    if file.filename == "":
+        return "No file selected"
+    
+    filename = secure_filename(file.filename)
+    user_folder = os.path.join(app.config["UPLOAD_FOLDER"], session["username"])
+    os.makedirs(user_folder, exist_ok=True)
+
+    path = os.path.join(user_folder, filename)
+    file.save(path)
+    return redirect("/My Fakedrive")
