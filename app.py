@@ -72,8 +72,12 @@ def logout():
     del session["username"]
     return redirect("/")
 
-@app.route("/upload", methods=["POST"])
+@app.route("/upload")
 def upload():
+    return render_template("upload.html")
+
+@app.route("/upload_file", methods=["POST"])
+def upload_file():
     if "username" not in session:
         return redirect("/login")
     
@@ -87,4 +91,7 @@ def upload():
 
     path = os.path.join(user_folder, filename)
     file.save(path)
+
+    sql = "INSERT INTO files (filename, filepath, owner_id) VALUES (?, ?, (SELECT id FROM users WHERE username = ?))"
+    db.execute(sql, [filename, path, session["username"]])
     return redirect("/My Fakedrive")

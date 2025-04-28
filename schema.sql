@@ -3,3 +3,10 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     password_hash TEXT
 );
+
+CREATE TABLE files (
+    id INTEGER PRIMARY KEY,
+    filename  TEXT,
+    filepath TEXT,
+    owner_id INTEGER REFERENCES users
+)

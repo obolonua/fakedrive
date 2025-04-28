@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File - FakeDrive</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        nav strong {
+            font-size: 1.2em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .upload-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .upload-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .upload-box h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .upload-box input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        .upload-box button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-box button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar -->
+    <nav>
+        <div>
+            <strong>FakeDrive</strong>
+        </div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/My Fakedrive">My FakeDrive</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Upload form -->
+    <div class="upload-container">
+        <div class="upload-box">
+            <h2>Upload a File</h2>
+            <form action="/upload_file" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required><br>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
