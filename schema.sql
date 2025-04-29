@@ -8,5 +8,6 @@ CREATE TABLE files (
     id INTEGER PRIMARY KEY,
     filename  TEXT,
     filepath TEXT,
-    owner_id INTEGER REFERENCES users
+    owner_id INTEGER REFERENCES users,
+    public INTEGER DEFAULT 0
 )
