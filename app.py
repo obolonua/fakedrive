@@ -65,7 +65,17 @@ def authentication():
 def my_fakedrive():
     if "username" not in session:
         return redirect("/login")
-    return render_template("my_fakedrive.html")
+    
+    sql_user = "SELECT id FROM users WHERE username = ?"
+    user = db.query(sql_user, [session["username"]])
+    if not user:
+        return redirect("logout")
+    user_id = user[0][0]
+
+    sql_files = "SELECT id, filename FROM files WHERE owner_id = ?"
+    files = db.query(sql_files, [user_id])
+
+    return render_template("my_fakedrive.html", files=files)
 
 @app.route("/logout")
 def logout():
