@@ -59,9 +59,9 @@ def authentication():
 
     if check_password_hash(password_hash, password):
         session["username"] = username
-        return redirect("/My Fakedrive")
+        return redirect("/my_Fakedrive")
     
-@app.route("/My Fakedrive")
+@app.route("/my_Fakedrive")
 def my_fakedrive():
     if "username" not in session:
         return redirect("/login")
@@ -95,6 +95,9 @@ def upload_file():
     if file.filename == "":
         return "No file selected"
     
+    visibility = request.form.get("visibility", "private")
+    is_public = 1 if visibility == "public" else 0
+
     filename = secure_filename(file.filename)
     user_folder = os.path.join(app.config["UPLOAD_FOLDER"], session["username"])
     os.makedirs(user_folder, exist_ok=True)
@@ -102,6 +105,10 @@ def upload_file():
     path = os.path.join(user_folder, filename)
     file.save(path)
 
-    sql = "INSERT INTO files (filename, filepath, owner_id) VALUES (?, ?, (SELECT id FROM users WHERE username = ?))"
-    db.execute(sql, [filename, path, session["username"]])
-    return redirect("/My Fakedrive")
+    sql = """
+    INSERT INTO files (filename, filepath, owner_id, public)
+    VALUES (?, ?, (SELECT id FROM users WHERE username = ?), ?)
+    """
+    db.execute(sql, [filename, path, session["username"], is_public])
+    
+    return redirect("/my_Fakedrive")
