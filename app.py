@@ -95,8 +95,6 @@ def my_files():
     files = db.query(sql, [user_id])
     return render_template("my_fakedrive.html", files=files, view="my")
 
-
-
 @app.route("/logout")
 def logout():
     del session["username"]
@@ -132,3 +130,17 @@ def upload_file():
     db.execute(sql, [filename, path, session["username"], is_public])
     
     return redirect("/my_fakedrive")
+
+@app.route("/download/<int:file_id>")
+def download(file_id):
+    if "username" not in session:
+        return redirect("/login")
+
+    sql = "SELECT filepath FROM files WHERE id = ?"
+    result = db.query(sql, [file_id])
+    
+    if not result:
+        return "File not found"
+
+    filepath = result[0][0]
+    return send_file(filepath, as_attachment=True)
