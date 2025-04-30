@@ -59,23 +59,43 @@ def authentication():
 
     if check_password_hash(password_hash, password):
         session["username"] = username
-        return redirect("/my_Fakedrive")
+        return redirect("/my_fakedrive")
     
-@app.route("/my_Fakedrive")
+@app.route("/my_fakedrive")
 def my_fakedrive():
     if "username" not in session:
         return redirect("/login")
+
+    sql_files = """
+        SELECT files.id, files.filename, users.username
+        FROM files
+        JOIN users ON files.owner_id = users.id
+        WHERE files.public = 1
+    """
+    files = db.query(sql_files)
+
+    return render_template("my_fakedrive.html", files=files, view="all")
+
+@app.route("/my_files")
+def my_files():
+    if "username" not in session:
+        return redirect("/login")
     
+    username = session["username"]
     sql_user = "SELECT id FROM users WHERE username = ?"
-    user = db.query(sql_user, [session["username"]])
-    if not user:
-        return redirect("logout")
-    user_id = user[0][0]
+    user = db.query(sql_user, [username])
 
-    sql_files = "SELECT id, filename FROM files WHERE owner_id = ?"
-    files = db.query(sql_files, [user_id])
+    user_id = user[0][0] 
+    sql = """
+        SELECT files.id, files.filename, users.username
+        FROM files
+        JOIN users ON files.owner_id = users.id
+        WHERE files.owner_id = ? AND files.public = 0
+    """
+    files = db.query(sql, [user_id])
+    return render_template("my_fakedrive.html", files=files, view="my")
 
-    return render_template("my_fakedrive.html", files=files)
+
 
 @app.route("/logout")
 def logout():
@@ -111,4 +131,4 @@ def upload_file():
     """
     db.execute(sql, [filename, path, session["username"], is_public])
     
-    return redirect("/my_Fakedrive")
+    return redirect("/my_fakedrive")
