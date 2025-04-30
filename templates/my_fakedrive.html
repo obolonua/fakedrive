@@ -74,18 +74,18 @@
             border-bottom: 1px solid #ddd;
         }
 
-    td a {
-        background-color: #28a745;
-        color: white;
-        padding: 8px 12px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
+        td a {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
 
-    td a:hover {
-        background-color: #218838;
-    }
+        td a:hover {
+            background-color: #218838;
+        }
 
         .upload-btn {
             position: fixed;
@@ -109,6 +109,11 @@
             text-align: right;
         }
 
+        th.download-header {
+            text-align: right;
+            padding-right: 25px;
+        }
+
     </style>
 </head>
 <body>
@@ -122,7 +127,7 @@
     </nav>
 
     <div class="file-buttons">
-        <a href="/all_files">All Files</a>
+        <a href="/my_fakedrive">All Files</a>
         <a href="/my_files">My Files</a>
     </div>
 
@@ -134,23 +139,32 @@
                 Your Files
             {% endif %}
         </h2>
-        {% if files %}
-        <table>
-            <tbody>
-                {% for file in files %}
-                <tr>
-                    <td>{{ file.filename }}</td>
-                    {% if view == "all" %}
-                    <td>{{ file.username }}</td>
-                    {% endif %}
-                <td class="download-cell"><a href="/download/{{ file.id }}">Download</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
+            {% if files %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            {% if view == "all" %}
+                            <th>Owner</th>
+                            {% endif %}
+                            <th class="download-header"> Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in files %}
+                        <tr>
+                            <td>{{ file.filename }}</td>
+                            {% if view == "all" %}
+                            <td>{{ file[2] }}</td>  {# or file.username if using dicts #}
+                            {% endif %}
+                            <td class="download-cell"><a href="/download/{{ file.id }}">Download</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
         <p>No files to show.</p>
-        {% endif %}
+            {% endif %}
     </div>
 
     <a class="upload-btn" href="/upload">📤 Upload</a>
