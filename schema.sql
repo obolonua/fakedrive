@@ -9,5 +9,5 @@ CREATE TABLE files (
     filename  TEXT,
     filepath TEXT,
     owner_id INTEGER REFERENCES users,
-    public INTEGER DEFAULT 0
+    public INTEGER
 )
