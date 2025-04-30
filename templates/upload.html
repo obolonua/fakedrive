@@ -60,7 +60,9 @@
         }
 
         .upload-box input[type="file"] {
-            margin-bottom: 20px;
+            display: block;
+            margin: 0 auto 20px auto;
+            text-align: center;
         }
 
         .upload-box button {
@@ -79,14 +81,13 @@
     </style>
 </head>
 <body>
-
     <nav>
         <div>
             <strong>FakeDrive</strong>
         </div>
         <div>
             <a href="/">Home</a>
-            <a href="/My Fakedrive">My FakeDrive</a>
+            <a href="/my_Fakedrive">My FakeDrive</a>
             <a href="/logout">Logout</a>
         </div>
     </nav>
@@ -94,12 +95,16 @@
     <div class="upload-container">
         <div class="upload-box">
             <h2>Upload a File</h2>
-            <form action="/upload_file" method="POST" enctype="multipart/form-data">
-                <input type="file" name="file" required><br>
-                <button type="submit">Upload</button>
-            </form>
+                <form action="/upload_file" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" required><br><br>
+                    <label for="visibility">Who can see this file?</label>
+                    <select name="visibility" id="visibility">
+                        <option value="private">Only Me</option>
+                        <option value="public">Everyone</option>
+                    </select><br><br>
+                    <button type="submit">Upload</button>
+                </form>
         </div>
     </div>
-
 </body>
 </html>
