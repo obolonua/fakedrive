@@ -132,6 +132,10 @@
     </div>
 
     <div class="file-list">
+        <form method="GET" action="/my_fakedrive" style="text-align: center; margin-bottom: 20px;">
+            <input type="text" name="q" placeholder="Search public files..." value="{{ request.args.get('q', '') }}">
+            <button type="submit">Search</button>
+        </form>
         <h2>
             {% if view == "all" %}
                 All Public Files

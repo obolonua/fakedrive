@@ -65,14 +65,26 @@ def authentication():
 def my_fakedrive():
     if "username" not in session:
         return redirect("/login")
+    
+    search_query = request.args.get("q", "").strip()
 
-    sql_files = """
-        SELECT files.id, files.filename, users.username
-        FROM files
-        JOIN users ON files.owner_id = users.id
-        WHERE files.public = 1
-    """
-    files = db.query(sql_files)
+    if search_query:
+        sql = """
+            SELECT files.id, files.filename, users.username 
+            FROM files 
+            JOIN users ON files.owner_id = users.id 
+            WHERE files.public = 1 AND files.filename LIKE ?
+        """
+        files = db.query(sql, [f"%{search_query}%"])
+
+    else:
+        sql_files = """
+            SELECT files.id, files.filename, users.username
+            FROM files
+            JOIN users ON files.owner_id = users.id
+            WHERE files.public = 1
+        """
+        files = db.query(sql_files)
 
     return render_template("my_fakedrive.html", files=files, view="all")
 
