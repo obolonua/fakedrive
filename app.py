@@ -144,3 +144,30 @@ def download(file_id):
 
     filepath = result[0][0]
     return send_file(filepath, as_attachment=True)
+
+@app.route("/delete/<int:file_id>")
+def delete(file_id):
+    if "username" not in session:
+        return redirect("/login")
+
+    sql = """
+    SELECT files.filepath, users.username 
+    FROM files 
+    JOIN users ON files.owner_id = users.id 
+    WHERE files.id = ?
+    """
+    result = db.query(sql, [file_id])
+    if not result:
+        return "File not found"
+
+    filepath, owner_username = result[0]
+
+    if session["username"] != owner_username:
+        return "Unauthorized", 403
+
+    if os.path.exists(filepath):
+        os.remove(filepath)
+
+    db.execute("DELETE FROM files WHERE id = ?", [file_id])
+
+    return redirect("/my_fakedrive")

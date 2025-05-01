@@ -157,7 +157,11 @@
                             {% if view == "all" %}
                             <td>{{ file[2] }}</td>  {# or file.username if using dicts #}
                             {% endif %}
-                            <td class="download-cell"><a href="/download/{{ file.id }}">Download</a></td>
+                            <td class="download-cell">
+                                <a href="/download/{{ file.id }}">Download</a>
+                                <a href="/delete/{{ file.id }}" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
+                            </td>
+                            
                         </tr>
                         {% endfor %}
                     </tbody>
