@@ -1,131 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>FakeDrive Login</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        nav {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        nav strong {
-            font-size: 1.2em;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="submit"] {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        .note {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.95em;
-        }
-
-        .note a {
-            color: #FF5733;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .note a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/login.css') }}"
+    />
+  </head>
+  <body>
     <nav>
-        <div>
-            <strong>FakeDrive</strong>
-        </div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/login">Login</a>
-        </div>
+      <div>
+        <strong>FakeDrive</strong>
+      </div>
+      <div>
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+      </div>
     </nav>
-    
+
     <div class="container">
-        <h2>Login to FakeDrive</h2>
-        <form action="/authentication" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+      <h2>Login to FakeDrive</h2>
+      <form action="/authentication" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
 
-            <input type="submit" value="Log In">
-        </form>
-        <div class="note">
-            Don't have an account? <a href="/signup">Sign up here</a>.
-        </div>
+        <input type="submit" value="Log In" />
+      </form>
+      <div class="note">
+        Don't have an account? <a href="/signup">Sign up here</a>.
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

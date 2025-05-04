@@ -1,80 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>About - FakeDrive</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        nav {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        nav strong {
-            font-size: 1.2em;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        p {
-            font-size: 1.1em;
-            color: #555;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/about.css') }}"
+    />
+  </head>
+  <body>
     <nav>
-        <div>
-            <strong>FakeDrive</strong>
-        </div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/login">Login</a>
-        </div>
+      <div>
+        <strong>FakeDrive</strong>
+      </div>
+      <div>
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+      </div>
     </nav>
 
     <div class="container">
-        <h1>About FakeDrive</h1>
-        <p>
-            FakeDrive is a simple cloud storage app built for educational purposes. It allows users to create accounts,
-            log in securely, and manage their personal files online. This project is a learning tool to explore web
-            development with Flask, HTML, CSS, and SQLite.
-        </p>
-        <p>
-            The project includes essential features such as user authentication, session management, file uploads,
-            and clean UI navigation — all without dynamic frontend rendering frameworks.
-        </p>
+      <h1>About FakeDrive</h1>
+      <p>
+        FakeDrive is a simple cloud storage app built for educational purposes.
+        It allows users to create accounts, log in securely, and manage their
+        personal files online. This project is a learning tool to explore web
+        development with Flask, HTML, CSS, and SQLite.
+      </p>
+      <p>
+        The project includes essential features such as user authentication,
+        session management, file uploads, and clean UI navigation — all without
+        dynamic frontend rendering frameworks.
+      </p>
     </div>
-
-</body>
+  </body>
 </html>

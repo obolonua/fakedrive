@@ -1,89 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>FakeDrive</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        nav {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        nav strong {
-            font-size: 1.2em;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .description {
-            padding: 20px;
-            font-size: 1.1em;
-            color: #333;
-        }
-
-        .description strong {
-            font-weight: bold;
-        }
-
-        .description a {
-            font-weight: bold;
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .description a:hover {
-            text-decoration: underline;
-        }
-
-        .description .signup-link {
-            color: #FF5733; 
-        }
-    </style>
-</head>
-<body>
-
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/main.css') }}"
+    />
+  </head>
+  <body>
     <nav>
-        <div>
-            <strong>FakeDrive</strong>
-        </div>
-        <div>
-            {% if session.get('username') %}
-                <a href="/my_fakedrive">My FakeDrive</a>
-                <a href="/logout">Logout</a>
-            {% else %}
-                <a href="/about">About</a>            
-                <a href="/login">Login</a>
+      <div>
+        <strong>FakeDrive</strong>
+      </div>
+      <div>
+        {% if session.get('username') %}
+        <a href="/my_fakedrive">My FakeDrive</a>
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/about">About</a>
+        <a href="/login">Login</a>
 
-            {% endif %}
-            </div>
+        {% endif %}
+      </div>
     </nav>
 
     <div class="description">
-        <p><strong>Welcome to FakeDrive!</strong></p>
-        <p>This is your personal cloud storage space. Upload, download, and manage your files easily from anywhere!</p>
-        <p><strong>To use this app, please <a href="/login">log in</a> first.</strong></p>
-        <p>If you don't have an account yet, please <a href="/signup" class="signup-link">sign up</a> to get started!</p>
+      <p><strong>Welcome to FakeDrive!</strong></p>
+      <p>
+        This is your personal cloud storage space. Upload, download, and manage
+        your files easily from anywhere!
+      </p>
+      <p>
+        <strong
+          >To use this app, please <a href="/login">log in</a> first.</strong
+        >
+      </p>
+      <p>
+        If you don't have an account yet, please
+        <a href="/signup" class="signup-link">sign up</a> to get started!
+      </p>
     </div>
-
-</body>
+  </body>
 </html>
-
-
