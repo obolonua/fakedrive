@@ -1,0 +1,51 @@
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        nav strong {
+            font-size: 1.2em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .description {
+            padding: 20px;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .description strong {
+            font-weight: bold;
+        }
+
+        .description a {
+            font-weight: bold;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .description a:hover {
+            text-decoration: underline;
+        }
+
+        .description .signup-link {
+            color: #FF5733; 
+        }
