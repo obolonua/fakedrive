@@ -61,7 +61,7 @@ def authentication():
         session["username"] = username
         return redirect("/my_fakedrive")
     
-@app.route("/my_fakedrive")
+@app.route("/my_fakedrive")    
 def my_fakedrive():
     if "username" not in session:
         return redirect("/login")
@@ -183,3 +183,31 @@ def delete(file_id):
     db.execute("DELETE FROM files WHERE id = ?", [file_id])
 
     return redirect("/my_fakedrive")
+
+@app.route("/file/<int:file_id>")
+def file_detail(file_id):
+
+    sql_file = "SELECT id, filename, owner_id FROM files WHERE id = ? AND public = 1"
+    file = db.query(sql_file, [file_id])
+    if not file:
+        return "File not found or not public", 404
+
+    file = file[0]
+
+    sql_comments = "SELECT username, message FROM comments WHERE file_id = ? ORDER BY id DESC"
+    comments = db.query(sql_comments, [file_id])
+
+    return render_template("file_detail.html", file=file, comments=comments)
+
+@app.route("/file/<int:file_id>/comment", methods=["POST"])
+def post_comment(file_id):
+    if "username" not in session:
+        return redirect("/login")
+
+    message = request.form["message"]
+    username = session["username"]
+
+    sql = "INSERT INTO comments (file_id, username, message) VALUES (?, ?, ?)"
+    db.execute(sql, [file_id, username, message])
+
+    return redirect(f"/file/{file_id}")
