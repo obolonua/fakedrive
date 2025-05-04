@@ -114,6 +114,18 @@
             padding-right: 25px;
         }
 
+        a.file-link {
+            display: inline-block;
+            text-decoration: none;
+            color: inherit; /* same as table text */
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        a.file-link:hover {
+            background-color: #e0e0e0; /* light grey hover */
+        }
+
     </style>
 </head>
 <body>
@@ -156,17 +168,21 @@
                     </thead>
                     <tbody>
                         {% for file in files %}
-                        <tr>
-                            <td>{{ file.filename }}</td>
-                            {% if view == "all" %}
-                            <td>{{ file[2] }}</td>  {# or file.username if using dicts #}
-                            {% endif %}
-                            <td class="download-cell">
-                                <a href="/download/{{ file.id }}">Download</a>
-                                <a href="/delete/{{ file.id }}" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
-                            </td>
-                            
-                        </tr>
+                                <tr>
+                                <td>
+                                    <a href="/file/{{ file.id }}" class="file-link">
+                                        {{ file.filename }}
+                                    </a>
+                                </td>
+                                {% if view == "all" %}
+                                <td>{{ file[2] }}</td>  {# or file.username #}
+                                {% endif %}
+                                <td class="download-cell">
+                                    <a href="/download/{{ file.id }}">Download</a>
+                                    <a href="/delete/{{ file.id }}" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
+                                </td>
+                            </tr>
+
                         {% endfor %}
                     </tbody>
                 </table>
@@ -174,8 +190,6 @@
         <p>No files to show.</p>
             {% endif %}
     </div>
-
     <a class="upload-btn" href="/upload">📤 Upload</a>
-
 </body>
 </html>
